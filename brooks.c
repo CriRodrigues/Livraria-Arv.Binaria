@@ -1,43 +1,46 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include "brooks.h"
 
 extern Filiais *ultimaFilial;
-Filiais *criaFilial(int id)
+Filiais *criaFilial(int id, const char endereco[], const char nomeGerente[])
 {
-    Filiais *f = (Filiais *) malloc (sizeof(Filiais)); 
+    Filiais *f = (Filiais *) malloc (sizeof(Filiais));
     f->id = id;
     f->livros = NULL;
-    f->next = f->prev = NULL; 
-    
-    ultimaFilial = f;
+    strcpy(f->endereco, endereco);
+    strcpy(f->nomeGerente, nomeGerente);
+    f->next = f->prev = NULL;
     return f;
 }
 
-void cadNovaFilial(int id, char titulo, char gere)
+void cadNovaFilial(int id,const char endereco[],const char nomeGerente[])
 {
     if (!ultimaFilial)
     {
-        criaFilial(id);
+        ultimaFilial = criaFilial(id, endereco, nomeGerente);
     }
     else
     {
-        
+
         Filiais *tmp = ultimaFilial;
-        for (;tmp;tmp = tmp->prev)
+        for (;tmp; tmp = tmp->prev)
         {
             if (id == tmp->id)
             {
                 printf ("ERRO! Filial com id já cadastrado\n");
                 return;
             }
-            
+
         }
-        tmp = criaFilial(id);
-        ultimaFilial->next = tmp;
+        tmp = criaFilial(id,endereco,nomeGerente);
         tmp->prev = ultimaFilial;
+        tmp->next = NULL;
+        ultimaFilial->next = tmp;
         ultimaFilial = tmp;
-     }   
+     }
 }
 
 Filiais *removerFilial(int id, Filiais *f)
@@ -45,27 +48,36 @@ Filiais *removerFilial(int id, Filiais *f)
 
     return NULL;
 }
-
-Livro *cadLivroFilial(Filiais *f, char isbn, char autor,int qtdLivros )
+Livro *criaLivro(const char isbn[], const char autor[],const char titulo[],int qtdLivros)
 {
-    Livro *tmp;
+    Livro *novoLivro = (Livro*) malloc (sizeof(Livro));
+    strcpy (novoLivro->isbn, isbn);
+    strcpy (novoLivro->autor, autor);
+    strcpy (novoLivro->titulo, titulo);
+    novoLivro->qtdLivros = qtdLivros;
+    novoLivro->right = novoLivro->left = NULL;
+    return novoLivro;
 
-    if (!f->livros)
-    {
-        f->livros  = (Livro *) malloc (sizeof(Livro)); 
-        f->livros->right = f->livros->left = NULL;
-    }
-    else
-    {
-       // *tmp = 
-    }
-    return NULL;
 }
-
-
-Livro *cadNovoLivro(Filiais *f, char isbn, char autor,int qtdLivros )
+Livro *cadLivroFilial(Filiais *f, const char isbn[], const char autor[],const char titulo[],int qtdLivros)
 {
-    return NULL;
+
+if (!f)
+{
+    return NULL;    
+}
+    
+ Livro *novoLivro = criaLivro(isbn, autor, titulo, qtdLivros);
+
+if(!f -> livros)
+{
+     f->livros = novoLivro;   
+}
+else
+{
+
+}
+    return f->livros;
 }
 
 Livro *removeLivros(Filiais *f,int id, char isbn)
@@ -74,13 +86,15 @@ Livro *removeLivros(Filiais *f,int id, char isbn)
     return NULL;
 }
 
-void impressaoFiliais(int id, Filiais *f)
+void impressaoFiliais( Filiais *f)
 {
     Filiais *tmp = f;
 
     for(; tmp; tmp=tmp->prev)
-    {
-        printf("filial: %d\n", tmp->id);
+    {   
+        printf("------------//------------//---------//--------//\n");
+        printf("id Filial: %d\nEndereço: %c\nNome do Gerente: %s\n", tmp->id,tmp->endereco,tmp->nomeGerente);
+        printf("------------//------------//---------//--------//\n");
     }
  }
 
@@ -90,15 +104,14 @@ int buscaFiliais(int id, Filiais *f)
 }
 
     // funcao de impressao do acervo;
-int buscaLivro(Filiais *f, char isbn, char autor,char titulo)
+int buscaLivro(Filiais *f, char const isbn[], const char autor[],const char titulo[])
 {
 
-    return 0; 
+    return 0;
 }
 
-void   imprimeAcerivo (Filiais *f )
+void imprimeAcerivo (Filiais *f )
 {
 
 }
-
 

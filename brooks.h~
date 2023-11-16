@@ -7,7 +7,7 @@ typedef struct Livro
     char isbn[5];
     char titulo[20];
     char autor[50];
-    int qtdLivro;
+    int qtdLivros;
     struct Livro  *right, *left;
 
 } Livro;
@@ -24,23 +24,22 @@ typedef struct Filiais
 } Filiais;
 
 //as funçoes abaixo são respectivas para add, rm, filiais.
-Filiais *criaFilial(int id);
-void cadNovaFilial(int id, char titulo, char gere);
-Filiais *removerFilial(int id, Filiais *f);
+Filiais *criaFilial( int id, const char endereco[], const char nomeGerente[]);
+void cadNovaFilial(int id,const char endereco[],const char nomeGerente[]);
+Filiais *removerFilial(const int id, Filiais *f);
 
 //as funçoes abaixo são respectivas para cadastro do acervo.
 
-Livro *criaAcervo();
-Livro *cadNovoLivro(Filiais *f, char isbn, char autor,int qtdLivro );
-Livro *cadLivroFilial(Filiais *f, char isbn, char autor,int qtdLivros );
-Livro *removeLivro(Filiais *f,int id, char isbn);
+Livro *criaLivro(const char isbn[], const char autor[], const char titulo[],int qtdLivros);
+Livro *cadLivroFilial(Filiais *f,const char isbn[], const char autor[],const char titulo[],int qtdLivros);
+Livro *removeLivro(Filiais *f,const int id, const char isbn[]);
 
 // funçoes de impressao e busca filal.
-void  impressaoFiliais(int id, Filiais *f);
+void  impressaoFiliais( Filiais *f);
 int   buscaFiliais(int id, Filiais *f);
 
 // funcao de impressao do acervo;
-int   buscaLivro(Filiais *f, char isbn, char autor,char titulo);
+int   buscaLivro(Filiais *f, const char isbn[], const char autor[],const char titulo[]);
 void   imprimeAcerivo (Filiais *f );
 
 

@@ -16,16 +16,31 @@ int main ()
         scanf("%c",&op);
         if( op == 'h' )
         {
-        
+
         }
        if(op == 'j')
         {
-
+            int qtdLivros;
+            char isbn[5],titulo[20],autor[50];
+            printf("Quantidade de Livros: ");
+            scanf("%d",&qtdLivros);
+                if(qtdLivros == -1)
+                    break;
+            printf("ISBN: ");
+            scanf("%s",isbn);
+            printf("Titulo do Livro: ");
+            scanf("%s", titulo);
+            printf("Autor: ");
+            scanf("%s",autor);
+            cadLivroFilial(ultimaFilial,isbn,autor,titulo,qtdLivros);
+                printf("-----------------//------------------------//---------------------");
+ 
         }
         if(op == 'k')
         {
             system("clear");
             impressaoFiliais(ultimaFilial);
+            imprimeAcervo(ultimaFilial->livros);
         }
         if(op == 'c')
         {
@@ -34,21 +49,17 @@ int main ()
             for(;;)
             {
                 printf("------------//-----------------------//------------------------\n");
-                printf("id nova filial: ");                              
+                printf("id nova filial: ");
                 scanf("%d",&id);
                 if(id == -1)
                     break;
                 printf("Nome do Gerente: ");
-                fgets(nomeGerente,50,stdin);                           
-                strcpy(nomeGerente,nomeGerente);
+                scanf("%s", nomeGerente);
                 printf("Endereço: ");
-                fgets(endereco,50,stdin);
-                strcpy (endereco,endereco);
+                scanf("%s", endereco);
                 printf("-----------------//------------------------//---------------------");
-                cadNovaFilial(id,endereco,nomeGerente);
-                
-                 
-        } 
+                cadNovaFilial(id, endereco, nomeGerente);
+        }
     }
 }
         return 0;

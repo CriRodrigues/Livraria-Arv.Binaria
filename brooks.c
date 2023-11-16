@@ -30,7 +30,7 @@ void cadNovaFilial(int id,const char endereco[],const char nomeGerente[])
         {
             if (id == tmp->id)
             {
-                printf ("ERRO! Filial com id já cadastrado\n");
+                printf("erro id ja cadastrado!!");
                 return;
             }
 
@@ -44,9 +44,28 @@ void cadNovaFilial(int id,const char endereco[],const char nomeGerente[])
 }
 
 Filiais *removerFilial(int id, Filiais *f)
-{
+{   
+    Filiais *tmp = f;
+    while(tmp != NULL)
+   {
+        if(tmp->id != id)
+        {
+            return NULL;
+        }
+        else if(tmp->prev == NULL)
+        {
+            f->prev->next = tmp->next;
+        }
+        else if(tmp->next == NULL)
+        {
+            f->next->prev = ultimaFilial->prev; 
+        }
+        else
+            f->next->prev = f->next;
+    }
+    return tmp;
+    free (tmp);
 
-    return NULL;
 }
 Livro *criaLivro(const char isbn[], const char autor[],const char titulo[],int qtdLivros)
 {
@@ -62,24 +81,43 @@ Livro *criaLivro(const char isbn[], const char autor[],const char titulo[],int q
 Livro *cadLivroFilial(Filiais *f, const char isbn[], const char autor[],const char titulo[],int qtdLivros)
 {
 
-if (!f)
-{
-    return NULL;    
-}
+    if (!f)
+    {
+        return NULL;    
+    }
     
- Livro *novoLivro = criaLivro(isbn, autor, titulo, qtdLivros);
+     Livro *novoLivro = criaLivro(isbn, autor, titulo, qtdLivros);
 
-if(!f -> livros)
+    if(!f -> livros)
+    {
+         f->livros = novoLivro;   
+         
+        printf("%s Meu primeiro libro: %s", __FUNCTION__, f->livros->titulo);
+    }
+    else
+    {
+        insereLivro(f->livros,isbn, autor, titulo, qtdLivros);
+    }
+}
+
+void insereLivro(Livro *raiz, const char isbn[], const char autor[], const char titulo[],int qtdLivros)
 {
-     f->livros = novoLivro;   
+    if(!raiz)
+    {
+        if (atoi(isbn)< atoi(raiz->isbn))
+        {
+            raiz->left = criaLivro(isbn, autor, titulo, qtdLivros);
+            printf("imprimido a esquerda");
+        }
+        else
+        {
+            raiz->right = criaLivro(isbn, autor, titulo, qtdLivros);
+            printf("imprimido a direita");
+     
+        }
+    }
+    
 }
-else
-{
-
-}
-    return f->livros;
-}
-
 Livro *removeLivros(Filiais *f,int id, char isbn)
 {
 
@@ -93,7 +131,7 @@ void impressaoFiliais( Filiais *f)
     for(; tmp; tmp=tmp->prev)
     {   
         printf("------------//------------//---------//--------//\n");
-        printf("id Filial: %d\nEndereço: %c\nNome do Gerente: %s\n", tmp->id,tmp->endereco,tmp->nomeGerente);
+        printf("id Filial: %d\nEndereço: %s\nNome do Gerente: %s\n", tmp->id,tmp->endereco,tmp->nomeGerente);
         printf("------------//------------//---------//--------//\n");
     }
  }
@@ -110,8 +148,20 @@ int buscaLivro(Filiais *f, char const isbn[], const char autor[],const char titu
     return 0;
 }
 
-void imprimeAcerivo (Filiais *f )
+void imprimeAcervo (Livro *raiz)
 {
-
+    printf("ta entrando aqui?");
+    if (raiz) 
+    {
+        imprimeAcervo(raiz->left);
+        printf("ISBN: %s\n Titulo:%S Autor: %s\n Quanidade de exemplares: %d\n", raiz->isbn,raiz->titulo,raiz->autor,raiz->qtdLivros);
+        imprimeAcervo(raiz->right);
+    }
 }
 
+
+void limparBuffer() 
+{
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}

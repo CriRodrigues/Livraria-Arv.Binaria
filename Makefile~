@@ -1,0 +1,6 @@
+:
+.c.o:
+	cc -c $<
+
+all:
+	cc -o livrariab *.o	

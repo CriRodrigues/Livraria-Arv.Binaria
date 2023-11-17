@@ -99,20 +99,36 @@ void cadLivroFilial(Filiais *f, const char isbn[], const char autor[],const char
 
 void insereLivro(Livro *raiz, const char isbn[], const char autor[], const char titulo[],int qtdLivros)
 {
+     Livro *tmp = NULL;	
+     Livro *last = NULL;
     if(raiz)
     {
+    	tmp = raiz;
+    	for (;tmp;)
+        {
+        	last = tmp;
+		if (atoi(isbn) < atoi(raiz->isbn))
+		{
+		     //= criaLivro(isbn, autor, titulo, qtdLivros);
+			tmp = tmp->left;
+		}
+		else
+		{
+		 	tmp = tmp->right;  
+		}
+	}    
+   	
+   	
         if (atoi(isbn) < atoi(raiz->isbn))
-        {
-            raiz->left = criaLivro(isbn, autor, titulo, qtdLivros);
-            printf("inserindo a esquerda\n");
-        }
-        else
-        {
-            raiz->right = criaLivro(isbn, autor, titulo, qtdLivros);
-            printf("inserindo a direita\n");
-
-        }
+	{
+	    last->left = criaLivro(isbn, autor, titulo, qtdLivros);
+	}
+	else
+	{
+	    last->right = criaLivro(isbn, autor, titulo, qtdLivros);
+	}
     }
+    
 }
 
 Livro *removeLivros(Filiais *f,int id, char isbn)

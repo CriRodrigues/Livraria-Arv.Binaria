@@ -31,7 +31,7 @@ Filiais *removerFilial( int id, Filiais *f);
 //as funçoes abaixo são respectivas para cadastro do acervo.
 
 Livro *criaLivro(const char isbn[], const char autor[], const char titulo[],int qtdLivros);
-Livro *cadLivroFilial(Filiais *f,const char isbn[], const char autor[],const char titulo[],int qtdLivros);
+void cadLivroFilial(Filiais *f,const char isbn[], const char autor[],const char titulo[],int qtdLivros);
 void insereLivro(Livro *raiz, const char isbn[], const char autor[], const char titulo[],int qtdLivros);
 Livro *removeLivro(Filiais *f, int id, const char isbn[]);
 
@@ -45,6 +45,6 @@ void   imprimeAcervo(Livro *raiz);
 
 //Limpar buffer
 
-void limparBuffer(); 
+void limparBuffer();
 
 #endif

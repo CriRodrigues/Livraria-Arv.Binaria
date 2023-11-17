@@ -34,11 +34,11 @@ int main ()
             scanf("%s",autor);
             cadLivroFilial(ultimaFilial,isbn,autor,titulo,qtdLivros);
                 printf("-----------------//------------------------//---------------------");
- 
+
         }
         if(op == 'k')
         {
-            system("clear");
+            // system("clear");
             impressaoFiliais(ultimaFilial);
             imprimeAcervo(ultimaFilial->livros);
         }

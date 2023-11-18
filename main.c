@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "menu.h"
 #include "brooks.h"
 
 Filiais *ultimaFilial = NULL;
@@ -11,6 +12,9 @@ Filiais *ultimaFilial = NULL;
 int main ()
 {
     char op;
+    
+    menuFilial();
+    /*******
     while(op != 'q')
     {
         scanf("%c",&op);
@@ -62,6 +66,8 @@ int main ()
         }
     }
 }
+******/
         return 0;
 }
+
 

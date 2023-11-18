@@ -1,7 +1,7 @@
-SRC=brooks.c main.c
-OBJ=brooks.o main.o
+SRC=brooks.c main.c menu.c
+OBJ=brooks.o main.o menu.o
 .c.o:
-	cc -c $<
+	cc -c -g $<
 
 all:$(OBJ)
 	cc -o livrariab $(OBJ)	

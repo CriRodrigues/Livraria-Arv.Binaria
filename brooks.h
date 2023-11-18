@@ -26,7 +26,7 @@ typedef struct Filiais
 //as funçoes abaixo são respectivas para add, rm, filiais.
 Filiais *criaFilial( int id, const char endereco[], const char nomeGerente[]);
 void cadNovaFilial(int id,const char endereco[],const char nomeGerente[]);
-Filiais *removerFilial( int id, Filiais *f);
+int removerFilial( int id);
 
 //as funçoes abaixo são respectivas para cadastro do acervo.
 

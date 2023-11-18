@@ -43,29 +43,19 @@ void cadNovaFilial(int id,const char endereco[],const char nomeGerente[])
      }
 }
 
-Filiais *removerFilial(int id, Filiais *f)
+int removerFilial(int id)
 {
-    Filiais *tmp = f;
-    while(tmp != NULL)
-   {
-        if(tmp->id != id)
-        {
-            return NULL;
-        }
-        else if(tmp->prev == NULL)
-        {
-            f->prev->next = tmp->next;
-        }
-        else if(tmp->next == NULL)
-        {
-            f->next->prev = ultimaFilial->prev;
-        }
-        else
-            f->next->prev = f->next;
-    }
-    return tmp;
-    free (tmp);
+    Filiais *tmp = ultimaFilial;
 
+    for(; tmp; tmp = tmp->prev)
+   {
+        if(tmp->id == id)
+   	{
+   		printf("Deleta Filial %d\n",id);     
+        	return 1;
+        }
+   }
+   return 0; 
 }
 Livro *criaLivro(const char isbn[], const char autor[],const char titulo[],int qtdLivros)
 {

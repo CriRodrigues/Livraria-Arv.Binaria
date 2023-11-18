@@ -47,6 +47,8 @@ void menuLivro()
         		}
 			break;
 			
+			case '4':
+			
 			case '6':
 				
 				return;
@@ -102,6 +104,14 @@ void menuFilial()
 				cadNovaFilial(id, endereco, nomeGerente);	
 			    }
 			break;
+			case'4':
+				int id;
+				printf("Digete o id para a remoçao da Filial\n");
+				getchar();
+				scanf("%d",&id);
+				removerFilial(id);
+			break;
+
 			case'5':
 			
 				menuLivro();

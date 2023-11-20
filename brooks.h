@@ -4,7 +4,7 @@
 
 typedef struct Livro
 {
-    char isbn[5];
+    char isbn[40];
     char titulo[20];
     char autor[50];
     int qtdLivros;
@@ -33,18 +33,31 @@ int removerFilial( int id);
 Livro *criaLivro(const char isbn[], const char autor[], const char titulo[],int qtdLivros);
 void cadLivroFilial(Filiais *f,const char isbn[], const char autor[],const char titulo[],int qtdLivros);
 void insereLivro(Livro *raiz, const char isbn[], const char autor[], const char titulo[],int qtdLivros);
-Livro *removeLivro(Filiais *f, int id, const char isbn[]);
+Livro *removeLivro(Livro *raiz, const char isbn[]);
 
 // funçoes de impressao e busca filal.
-void  impressaoFiliais( Filiais *f);
-int   buscaFiliais(int id, Filiais *f);
+void impressaoFiliais( Filiais *f);
+Filiais *buscaFilial(int id);
+int imprimeUmaFilial(Filiais *f, int id);
 
-// funcao de impressao do acervo;
-int   buscaLivro(Filiais *f, const char isbn[], const char autor[],const char titulo[]);
-void   imprimeAcervo(Livro *raiz);
+// funcao de busca e  impressao do acervo;
+Livro *buscaLivro(Filiais *f, Livro * raiz, int id, char const isbn[], const char autor[],const char titulo[], int qtdLivros);
+Livro *buscaLivroNaArvore(Livro *raiz, const char isbn[], const char autor[], const char titulo[], int qtdLivro);
+void imprimeAcervo(Livro *raiz);
+void imprimeArvore(Livro *t, int s);
+
+// funçao de remoçao do exemplares;
+Livro *removerLivroNaArvore(Livro *raiz, const char isbn[]);
+Livro *removerLivro(Filiais *f, int id, const char isbn[]);
+Livro *menorLivro(Livro *raiz);
+
+// funçao migrar estoque;
+// Livro *inserirLivrosDeOutraArvore(Livro *arvoreReceptora, Livro *arvoreDoadora, int idArvoreReceptora, int idArvoreDoadora);
 
 //Limpar buffer
 
 void limparBuffer();
+
+
 
 #endif
